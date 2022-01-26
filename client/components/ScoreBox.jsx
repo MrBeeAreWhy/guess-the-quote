@@ -8,7 +8,7 @@ class ScoreBox extends Component {
     render(){
         return (
             <div>
-                <h3>Scores</h3>
+                <h3>Today's Scores</h3>
                 Bryan: always wins
             </div>
         )

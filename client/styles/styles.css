@@ -2,6 +2,7 @@
 
 body {
     background-color: #f5f5f5;
+    font-family: 'Cabin', sans-serif;
 }
 
 h3 {
@@ -29,31 +30,50 @@ h3 {
 }
 
 .playBox {
-    min-width: 100%;
-    font-weight: bold;
+    min-width: 90%;
+    max-width: 90%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+
+}
+
+.guesses, .makeGuess {
+    border-radius: 10px;
+    padding: 8px;
+    margin: 8px;
+    font-size: 20px;
+    background-color: rgb(39, 132, 175);
+    box-shadow: 5px 4px 4px rgb(151, 151, 151);
+    border: 1px solid rgb(151, 151, 151);
+    color: white;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    width: fit-content;
+}
+
+.makeGuess {
+    background-color: rgb(182, 31, 31);
 }
 
 .quoteBox, .scoreBox {
-    font-family: 'Cabin', sans-serif;
+    
     font-size: 20px;
     font-weight: bold;
     background: white;
     padding: 12px;
+    margin: 10px;
     min-width: 90%;
     max-width: 90%;
     border: 1px solid rgb(151, 151, 151);
     border-radius: 10px;
     box-shadow: 5px 3px 3px rgb(151,151,151);
-    margin: 10px;
 }
 
 .quoteInfo {
     border: 1px solid rgb(151, 151, 151);
     border-radius: 10px;
     background: white;
-    min-width: 38%;
+    width: 70%;
     min-height: 400px;
     padding: 12px;
     margin: 10px;
@@ -61,12 +81,71 @@ h3 {
 }
 
 .guessBox {
+    display: flex;
+    flex-direction: column-reverse;
+    align-self: center;
     border: 1px solid rgb(151, 151, 151);
     border-radius: 10px;
     box-shadow: 5px 3px 3px rgb(151,151,151);
     background: white;
-    min-width: 38%;
-    min-height: 400px;
+    width: 32%;
+    min-height: 600px;
+    max-height: 600px;
     padding: 12px;
     margin: 10px;
+    overflow: hidden;
+}
+
+
+.answerBox{
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid rgb(151, 151, 151);
+    border-bottom: 1px solid rgb(151, 151, 151);
+}
+
+.inputAndButton{
+    display: flex;
+    justify-content: center;
+}
+
+.answerReveal, .answerRevealBlank {
+    border: 2px solid rgb(151, 151, 151);
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 4px;
+    margin: 4px;
+    min-width: 10px;
+    text-align: center;
+    min-height: 20px;
+}
+
+.answerRevealBlank {
+    border: 0px;
+}
+
+input {
+    border: 1px solid rgb(151, 151, 151);
+    padding: 7px;
+    margin: 4px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button {
+    background-color: rgb(39, 132, 175);
+    color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 8px;
+    margin: 4px;
+    font-size: 20px;
+}
+
+button:active {
+    border: 2px solid black;
 }

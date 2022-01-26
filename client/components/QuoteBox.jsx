@@ -8,7 +8,7 @@ class QuoteBox extends Component {
     render(){
         return (
             <div>
-                <h3>Who said this?</h3>
+                <h3>Which character said this...?</h3>
                 {this.props.quoteData.quote}
             </div>
         )

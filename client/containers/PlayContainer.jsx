@@ -14,11 +14,17 @@ class PlayContainer extends Component {
     render(){
         return(
             <div className="playBox">
-                <GuessBox />
+                <GuessBox 
+                characterName={this.props.characterName} 
+                makeGuess={this.props.makeGuess}
+                thisRoundsGuesses={this.props.thisRoundsGuesses}
+                />
                 <QuoteInfoBox 
                 quoteDetails={this.props.quoteDetails} 
                 imageDisplayed={this.props.imageDisplayed}
-                imageTrigger={this.props.imageTrigger} />
+                imageTrigger={this.props.imageTrigger}
+                
+                />
                 
             </div>
         )
