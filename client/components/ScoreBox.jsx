@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class QuoteBox extends Component {
+class ScoreBox extends Component {
     constructor(props){
         super(props);
     }
@@ -8,11 +8,11 @@ class QuoteBox extends Component {
     render(){
         return (
             <div>
-                <h3>Who said this?</h3>
-                {this.props.quoteData.quote}
+                <h3>Scores</h3>
+                Bryan: always wins
             </div>
         )
     }
 }
 
-export default QuoteBox;
+export default ScoreBox;

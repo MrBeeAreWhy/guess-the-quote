@@ -5,11 +5,14 @@ class GuessBox extends Component {
         super(props)
     }
 
+
+
     render(){
+        let guesses;
         return(
-            <div className="guessBox">
-                Here is a box with guesses from the user.
-                <input placeholder="and here is where they make guesses"></input>
+            <div className='guessBox'>
+                {guesses}
+                <div><input placeholder='Your guess'></input></div>
             </div>
         )
     }

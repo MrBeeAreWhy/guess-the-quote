@@ -8,6 +8,11 @@ module.exports = {
         path: path.resolve(__dirname, 'bundle'),
         filename: 'bundle.js',
     },
+    resolve: {
+        fallback: {
+            path: require.resolve('node-fetch')
+        }
+    },
     module: {
         rules: [
             {
@@ -27,6 +32,7 @@ module.exports = {
                     "css-loader"
                 ]
             }
+            
         ]
     },
     plugins: [

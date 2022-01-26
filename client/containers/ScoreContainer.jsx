@@ -1,20 +1,20 @@
 //renders the quote box after making the appropriate API call
 
 import React, { Component } from 'react';
-import QuoteBox from '../components/QuoteBox.jsx';
+import ScoreBox from '../components/ScoreBox.jsx';
 
-class QuoteContainer extends Component {
+class ScoreContainer extends Component {
     constructor(props) {
         super(props);
     }
 
     render(){
         return(
-            <div className="quoteBox">
-                <QuoteBox quoteData={this.props.quoteData}/>
+            <div className="scoreBox">
+                <ScoreBox />
             </div>
         )
     }
 }
 
-export default QuoteContainer;
+export default ScoreContainer;

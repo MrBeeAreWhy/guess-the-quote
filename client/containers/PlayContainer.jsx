@@ -15,7 +15,11 @@ class PlayContainer extends Component {
         return(
             <div className="playBox">
                 <GuessBox />
-                <QuoteInfoBox />
+                <QuoteInfoBox 
+                quoteDetails={this.props.quoteDetails} 
+                imageDisplayed={this.props.imageDisplayed}
+                imageTrigger={this.props.imageTrigger} />
+                
             </div>
         )
     }
