@@ -6,7 +6,6 @@ class QuoteInfoBox extends Component {
     }
 
     componentDidUpdate(){
-        console.log('updated')
         if (this.props.imageDisplayed === false){
             setTimeout(this.props.imageTrigger, 3000)
         }

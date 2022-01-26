@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import QuoteBox from '../components/QuoteBox.jsx';
 
+
 class QuoteContainer extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +12,7 @@ class QuoteContainer extends Component {
     render(){
         return(
             <div className="quoteBox">
-                <QuoteBox quoteData={this.props.quoteData}/>
+                <QuoteBox key='quoteContent' quoteData={this.props.quoteData.quote}/>
             </div>
         )
     }

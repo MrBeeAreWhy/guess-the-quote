@@ -1,15 +1,42 @@
+
 import React, { Component } from 'react';
+import AnimateOnChange from 'react-animate-on-change';
 
 class QuoteBox extends Component {
     constructor(props){
-        super(props);
+        super()
+        this.toAnimate = false;
+    }
+
+    // componentDidUpdate(prevProps){
+    //     if (this.props.quoteData !== prevProps.quoteData){
+    //         this.toAnimate = true;
+    //     } else {
+    //         this.toAnimate = false;
+    //     }
+    // }
+
+    shouldComponentUpdate(nextProps){
+        if (this.props.quoteData !== nextProps.quoteData){
+            this.toAnimate = true;
+        } else {
+            return false;
+        }
+        return true;
     }
 
     render(){
         return (
             <div>
-                <h3>Which character said this...?</h3>
-                {this.props.quoteData.quote}
+                <h3>Can you guess which character said this..?</h3>
+                <AnimateOnChange 
+                    key="animator"
+                    baseClassName="quote" 
+                    animationClassName="quote-loaded" 
+                    animate={this.toAnimate}>
+                        {this.props.quoteData}
+                </AnimateOnChange>
+                
             </div>
         )
     }

@@ -149,3 +149,16 @@ button {
 button:active {
     border: 2px solid black;
 }
+
+@keyframes yellowfade {
+    from {
+      background: yellow;
+    }
+    to {
+      background: transparent;
+    }
+  }
+
+  .quote-loaded {
+      animation: yellowfade 10s;
+  }

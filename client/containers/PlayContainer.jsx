@@ -18,6 +18,8 @@ class PlayContainer extends Component {
                 characterName={this.props.characterName} 
                 makeGuess={this.props.makeGuess}
                 thisRoundsGuesses={this.props.thisRoundsGuesses}
+                gameBegun={this.props.gameBegun}
+                startGame={this.props.startGame}
                 />
                 <QuoteInfoBox 
                 quoteDetails={this.props.quoteDetails} 
