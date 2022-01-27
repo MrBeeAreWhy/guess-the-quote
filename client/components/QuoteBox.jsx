@@ -8,14 +8,6 @@ class QuoteBox extends Component {
         this.toAnimate = false;
     }
 
-    // componentDidUpdate(prevProps){
-    //     if (this.props.quoteData !== prevProps.quoteData){
-    //         this.toAnimate = true;
-    //     } else {
-    //         this.toAnimate = false;
-    //     }
-    // }
-
     shouldComponentUpdate(nextProps){
         if (this.props.quoteData !== nextProps.quoteData){
             this.toAnimate = true;

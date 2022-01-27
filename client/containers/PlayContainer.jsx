@@ -20,12 +20,14 @@ class PlayContainer extends Component {
                 thisRoundsGuesses={this.props.thisRoundsGuesses}
                 gameBegun={this.props.gameBegun}
                 startGame={this.props.startGame}
+                startTime={this.props.startTime}
+                revealMask={this.props.revealMask}
                 />
                 <QuoteInfoBox 
                 quoteDetails={this.props.quoteDetails} 
                 imageDisplayed={this.props.imageDisplayed}
                 imageTrigger={this.props.imageTrigger}
-                
+                secondsRemaining={this.props.secondsRemaining}
                 />
                 
             </div>

@@ -9,7 +9,7 @@ class ScoreBox extends Component {
         return (
             <div>
                 <h3>Today's Scores</h3>
-                Bryan: always wins
+                To be added...
             </div>
         )
     }

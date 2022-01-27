@@ -12,20 +12,28 @@ class QuoteInfoBox extends Component {
     }
 
     render(){
-        if (this.props.imageDisplayed === true){
+        let questionImg = "https://qph.fs.quoracdn.net/main-qimg-654617264f9192ec976abe6e53356240-lq"
         return(
             <div className="quoteInfo">
-                <div id="quoteDetails">{this.props.quoteDetails.title}</div>
-                <div><img src={this.props.quoteDetails.image_url} id="relImg" alt="Your image"></img></div>
+                <div className="picsAndDetails">
+                    <div className="quoteDetails">
+                        <ul className='infoHeaders'>
+                            Anime Title
+                            <li>data</li>
+                            Number of Episodes
+                            <li>data</li>
+                            Initial Air Date
+                            <li>data</li>
+                        </ul>
+                        {this.props.quoteDetails.title ? this.props.quoteDetails.title : "Awaiting game start."}
+                    </div>
+                    <div className="animeImage"><img src={this.props.imageDisplayed ? this.props.quoteDetails.image_url : questionImg} id="relImg" alt="Your image"></img></div>
+                    <div className="charImage"><img src={this.props.imageDisplayed ? this.props.quoteDetails.image_url : questionImg} id="relImg" alt="Your image"></img></div>
+                </div>
+                <div className="timer"><span id='timeLeft'>{this.props.secondsRemaining}</span> seconds remain</div>
             </div>
-        )} else {
-        return(
-            <div className="quoteInfo">
-                <div id="quoteDetails">{this.props.quoteDetails.title}</div>
-                <div><img src="https://qph.fs.quoracdn.net/main-qimg-654617264f9192ec976abe6e53356240-lq" id="relImg" alt="Your image"></img></div>
-            </div>
-            )
-        }
+        )
+        
 
     }
 }
