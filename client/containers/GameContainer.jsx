@@ -13,6 +13,9 @@ class GameContainer extends Component {
             characterDetail: {},
             imageDisplayed: false,
             charImageDisplayed: false,
+            episodeCountDisplayed: false,
+            airDateDisplayed: false,
+            nicknamesDisplayed: false,
             dataIsLoaded: false,
             detailsAreLoaded: false,
             animeId: false,
@@ -36,13 +39,24 @@ class GameContainer extends Component {
     countDownTimer(){
         let timeLeft = this.state.secondsRemaining;
         timeLeft--;
-        if (timeLeft < 40){
+        if (timeLeft < 55 && this.state.episodeCountDisplayed === false){
+            this.setState({episodeCountDisplayed: true})
+        }
+        if (timeLeft < 50 && this.state.airDateDisplayed === false){
+            this.setState({airDateDisplayed: true})
+        }
+        if (timeLeft < 40 && this.state.imageDisplayed === false){
             this.setState({imageDisplayed: true})
         }
-        if (timeLeft < 20){
+        if (timeLeft < 30 && this.state.nicknamesDisplayed === false){
+            this.setState({nicknamesDisplayed: true})
+        }
+        if (timeLeft < 20 && this.state.charImageDisplayed === false){
             this.setState({charImageDisplayed: true})
         }
         if (timeLeft <= 0){
+            this.setState({quoteData: {quote: `TIME\'S UP! The right answer was ${this.state.characterName}. Restarting in 5 seconds.`}, dataIsLoaded: false})
+            setTimeout(this.startGame, 5000)
             clearInterval(this.state.intervalId);
         }
         this.setState({secondsRemaining: timeLeft})
@@ -59,10 +73,17 @@ class GameContainer extends Component {
             if (guessText.current.value === this.state.characterName && 
                 this.state.dataIsLoaded === true){
                 document.querySelector('input').value = '';
+                this.setState({quoteData: {quote: 'CORRECT ANSWER! Next round begins in 5 seconds.'}, dataIsLoaded: false})
                 clearInterval(this.state.intervalId);
-                return this.startGame()
+                return setTimeout(this.startGame, 5000);
             }
-            currentGuesses.push(guessText.current.value)
+            let lettersMatched = 0;
+            for (let i = 0; i < this.state.characterName.length; i++){
+                if (guessText.current.value[i] === this.state.characterName[i]){
+                    lettersMatched++;
+                }
+            }
+            currentGuesses.push('You guessed: ' + guessText.current.value, `\n -- ${lettersMatched} of your letters match correctly.`)
             document.querySelector('input').value = '';
             return this.setState({thisRoundsGuesses: currentGuesses})
         } else {
@@ -74,7 +95,7 @@ class GameContainer extends Component {
 
     componentDidUpdate() {
         if (this.state.gameBegun === true && this.state.dataIsFetching === false){
-        let pageRandom = Math.floor(Math.random()*6);
+        let pageRandom = Math.floor(Math.random()*15);
         let animeList = [
             'Naruto',
             'Death%20Note',
@@ -83,15 +104,21 @@ class GameContainer extends Component {
             'Shingeki%20no%20Kyojin',
             'Fullmetal Alchemist',
             'FLCL',
+            'One%20Piece',
+            'Cowboy%20Bebop',
+            'Trigun'
         ]
         let animeRandom = Math.floor(Math.random()*animeList.length);
 
         //this.setState({quoteData: {quote: `Quote from ${animeList[animeRandom]} looking at page ${pageRandom}`}, dataIsFetching: true})
         this.setState({dataIsFetching: true})
+        console.log('page ', pageRandom)
         fetch(`https://animechan.vercel.app/api/quotes/anime?title=${animeList[animeRandom]}&page=${pageRandom}`)
             .then(response => response.json())
             .then(response => {
-                let chosenQuote = response[Math.floor(Math.random()*(Object.keys(response).length))]
+                let quoteNum = Math.floor(Math.random()*(Object.keys(response).length))
+                console.log(quoteNum)
+                let chosenQuote = response[quoteNum]
                 let revealMask = {};
                 for (let i = 0; i < chosenQuote.character.length; i++){
                     let maskNum = Math.floor(Math.random()*chosenQuote.character.length)
@@ -112,7 +139,6 @@ class GameContainer extends Component {
             .then(response => {
                 for (let i = 0; i < response.results.length; i++){
                     if (response.results[i].title === animeList[animeRandom].replaceAll('%20', ' ')){
-                        console.log('matched anime: ')
                         console.log(response.results[i])
                         this.setState({animeDetail: response.results[i]});
                         break;
@@ -123,14 +149,20 @@ class GameContainer extends Component {
 
         if (this.state.dataIsLoaded === true && this.state.detailsAreLoaded === false){
             this.setState({detailsAreLoaded: true})
-            let searchName = this.state.characterName.replaceAll(' ', '%20')
+            let searchName;
+            searchName = this.state.characterName.replaceAll(' ', '%20')
+            console.log(searchName)
+            if (searchName === "Levi%20Ackerman"){searchName = "Levi"}
+            if (searchName === "Annie%20Leonhardt"){searchName = "Annie"}
             fetch(`https://api.jikan.moe/v3/search/character?q=${searchName}`)
                 .then(response => response.json())
                 .then(response => {
                     let matchedChar = false;
                     for (let i = 0; i < response.results.length; i++){
                         for (let j = 0; j < response.results[i].anime.length; j++){
-                            if (response.results[i].anime[j].mal_id === this.state.animeDetail.mal_id){
+                            console.log(response.results[i].name)
+                            if (response.results[i].anime[j].mal_id === this.state.animeDetail.mal_id
+                                && response.results[i].name.includes(this.state.characterName.substring(0, this.state.characterName.indexOf(' ')))){
                                 this.setState({characterDetail: response.results[i]})
                                 matchedChar = true;
                                 break;
@@ -150,12 +182,16 @@ class GameContainer extends Component {
         return(
         <div className="gameplayContainers">
             <QuoteContainer 
-            quoteData={this.state.quoteData} />
+            quoteData={this.state.quoteData}
+             />
             <PlayContainer 
             quoteDetails={this.state.animeDetail} 
             charDetails={this.state.characterDetail}
-            imageDisplayed={this.state.imageDisplayed}
+            imageDisplayed={this.state.imageDisplayed} //should pass one object, refactoring
             charImageDisplayed={this.state.charImageDisplayed}
+            episodeCountDisplayed={this.state.episodeCountDisplayed}
+            airDateDisplayed={this.state.airDateDisplayed}
+            nicknamesDisplayed={this.state.nicknamesDisplayed}
             characterName={this.state.characterName}
             thisRoundsGuesses={this.state.thisRoundsGuesses}
             gameBegun={this.state.gameBegun}

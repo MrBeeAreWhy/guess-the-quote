@@ -26,7 +26,7 @@ class QuoteBox extends Component {
                     baseClassName="quote" 
                     animationClassName="quote-loaded" 
                     animate={this.toAnimate}>
-                        {this.props.quoteData}
+                        "{this.props.quoteData}"
                 </AnimateOnChange>
                 
             </div>

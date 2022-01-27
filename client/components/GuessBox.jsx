@@ -71,7 +71,7 @@ function populateGuesses(guessList){
 
 function revealAnswer(answer, startTime, revealMask){
 
-    let revealInterval = Math.floor((60000/answer.length))
+    let revealInterval = Math.floor((80000/answer.length))
     let elapsedTime = Date.now() - startTime;
     let revealCount = 0;
     for (let i = elapsedTime; i > 0; i-=revealInterval){

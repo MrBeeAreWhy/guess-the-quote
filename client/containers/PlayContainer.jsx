@@ -29,6 +29,9 @@ class PlayContainer extends Component {
                 imageDisplayed={this.props.imageDisplayed}
                 charImageDisplayed={this.props.charImageDisplayed}
                 secondsRemaining={this.props.secondsRemaining}
+                episodeCountDisplayed={this.props.episodeCountDisplayed}
+                airDateDisplayed={this.props.airDateDisplayed}
+                nicknamesDisplayed={this.props.nicknamesDisplayed}
 
                 />
                 
