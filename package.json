@@ -4,8 +4,9 @@
   "description": "A simple game to guess quotes from anime characters",
   "main": "index.js",
   "scripts": {
+    "start": "NODE_ENV=production node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack serve",
+    "dev": "NODE_ENV=development webpack serve --open",
     "build": "webpack"
   },
   "keywords": [
@@ -18,8 +19,10 @@
   "author": "Bryan Bart",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "css-loader": "^6.5.1",
     "express": "^4.17.2",
+    "mongoose": "^6.1.8",
     "node-fetch": "^3.2.0",
     "react": "^17.0.2",
     "react-animate-on-change": "^2.2.0",

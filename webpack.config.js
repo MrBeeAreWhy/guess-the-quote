@@ -5,8 +5,18 @@ module.exports = {
     entry: path.join(__dirname, 'client', 'index.js'),
     mode: 'development',
     output: {
-        path: path.resolve(__dirname, 'bundle'),
-        filename: 'bundle.js',
+        path: path.resolve(__dirname),
+        filename: 'build/bundle.js',
+    },
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, 'client'),
+            publicPath: '/',
+        },
+        port: 8080,
+        proxy: {
+            '/api': 'http://localhost:3000'
+        },
     },
     resolve: {
         fallback: {
