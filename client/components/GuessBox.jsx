@@ -16,7 +16,7 @@ class GuessBox extends Component {
             return(
             <div className='guessBox'>
                 <div className='inputAndButton'>
-                    <button id='submitGuessButton' onClick={()=>this.props.startGame()}>Start a game?</button>
+                    <button id='submitGuessButton' onClick={()=>this.props.startGame()}>Click Here to Start The Game!</button>
                 </div>
                 <div className='answerBox'>
                     {hiddenAnswer}

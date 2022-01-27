@@ -10,7 +10,9 @@ class GameContainer extends Component {
         this.defaultState = {
             quoteData: {quote: 'Awaiting game start...'},
             animeDetail: {},
+            characterDetail: {},
             imageDisplayed: false,
+            charImageDisplayed: false,
             dataIsLoaded: false,
             detailsAreLoaded: false,
             animeId: false,
@@ -24,7 +26,6 @@ class GameContainer extends Component {
             thisRoundsGuesses: ['Start the game below!', 'The text bubbles below will begin to fill in to provide you clues about the character\'s name as time progresses. Additional hints about the anime the character comes from will be displayed in the panel to the right. Your score for a correct answer will decrease with time.'],
         }
         this.state = this.defaultState;
-        this.imageTrigger = this.imageTrigger.bind(this);
         this.makeGuess = this.makeGuess.bind(this);
         this.startGame = this.startGame.bind(this);
         this.countDownTimer = this.countDownTimer.bind(this);
@@ -32,15 +33,17 @@ class GameContainer extends Component {
 
     }
 
-    imageTrigger(){
-        return this.setState({imageDisplayed: true})
-    }
-
     countDownTimer(){
         let timeLeft = this.state.secondsRemaining;
         timeLeft--;
-        if (timeLeft < 0){
-            clearInterval(gameInterval);
+        if (timeLeft < 40){
+            this.setState({imageDisplayed: true})
+        }
+        if (timeLeft < 20){
+            this.setState({charImageDisplayed: true})
+        }
+        if (timeLeft <= 0){
+            clearInterval(this.state.intervalId);
         }
         this.setState({secondsRemaining: timeLeft})
     }
@@ -103,11 +106,14 @@ class GameContainer extends Component {
             .catch(error => {
                 this.setState({quoteData: {quote: "failed to load data."}})
             })
+
         fetch(`https://api.jikan.moe/v3/search/anime?q=${animeList[animeRandom]}&page=1`)
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.results.length; i++){
                     if (response.results[i].title === animeList[animeRandom].replaceAll('%20', ' ')){
+                        console.log('matched anime: ')
+                        console.log(response.results[i])
                         this.setState({animeDetail: response.results[i]});
                         break;
                     }
@@ -121,15 +127,11 @@ class GameContainer extends Component {
             fetch(`https://api.jikan.moe/v3/search/character?q=${searchName}`)
                 .then(response => response.json())
                 .then(response => {
-                    console.log('should see anime id for this character', this.state.animeDetail.mal_id)
-                    console.log(response.results)
                     let matchedChar = false;
                     for (let i = 0; i < response.results.length; i++){
-                        console.log(response.results[i].anime)
                         for (let j = 0; j < response.results[i].anime.length; j++){
-                            console.log(response.results[i].anime[j])
                             if (response.results[i].anime[j].mal_id === this.state.animeDetail.mal_id){
-                                console.log('MATCHING ANIME AND CHARACTER FOUND')
+                                this.setState({characterDetail: response.results[i]})
                                 matchedChar = true;
                                 break;
                             }
@@ -151,14 +153,15 @@ class GameContainer extends Component {
             quoteData={this.state.quoteData} />
             <PlayContainer 
             quoteDetails={this.state.animeDetail} 
+            charDetails={this.state.characterDetail}
             imageDisplayed={this.state.imageDisplayed}
+            charImageDisplayed={this.state.charImageDisplayed}
             characterName={this.state.characterName}
             thisRoundsGuesses={this.state.thisRoundsGuesses}
             gameBegun={this.state.gameBegun}
             startTime={this.state.startTime}
             revealMask={this.state.revealMask}
             makeGuess={this.makeGuess}
-            imageTrigger={this.imageTrigger}
             startGame={this.startGame}
             secondsRemaining={this.state.secondsRemaining} />
 

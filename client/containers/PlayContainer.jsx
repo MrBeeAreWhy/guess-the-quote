@@ -25,9 +25,11 @@ class PlayContainer extends Component {
                 />
                 <QuoteInfoBox 
                 quoteDetails={this.props.quoteDetails} 
+                charDetails={this.props.charDetails}
                 imageDisplayed={this.props.imageDisplayed}
-                imageTrigger={this.props.imageTrigger}
+                charImageDisplayed={this.props.charImageDisplayed}
                 secondsRemaining={this.props.secondsRemaining}
+
                 />
                 
             </div>

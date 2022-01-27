@@ -156,6 +156,10 @@ h3 {
     border: 0px;
 }
 
+.infoHeaders{
+    padding: 20px;
+}
+
 input {
     border: 1px solid rgb(151, 151, 151);
     padding: 7px;
