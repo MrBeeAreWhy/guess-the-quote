@@ -1,6 +1,8 @@
 # guess-the-quote
 
-This application is a full stack React/Node/Express application that queries an Anime Quote database, presents information on the series and prompts the user to guess the character that spoke the quote.
+This application is a full stack React/Node/Express application that queries an Anime Quote database, presents information on the specific anime and prompts the user to guess the character that spoke the quote. As time progresses (each guess is given 60 seconds) additional information will be revealed about the anime and character that spoke the quote.
+
+There are many quotes that behave erratically as the quotes are pulled from one API and the anime information is pulled from a separate API.
 
 # Installation
 
