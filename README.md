@@ -34,4 +34,5 @@ As the application is presently incomplete, is will be necessary to navigate to 
 - Session persistence via cookies/JWOT is necessary
 - Login/signup pages do not have any functionality, however the server will properly serve login.html / signup.html at '/' and '/signup' respectively.
 - The '/users' endpoint will display all users in the MondoDB database upon a GET request -- POST requests will add a user (per Mongoose model, username must be unique)
+- Responsive styling -- currently the game is formatted to only really work in 1080p and full screen.
 
